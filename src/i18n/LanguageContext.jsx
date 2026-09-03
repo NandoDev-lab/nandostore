@@ -20,6 +20,12 @@ translations['pt-BR'].connector = 'e'
 translations.en.life = 'life.'
 translations.en.connector = 'and'
 
+// Remove o título antigo também de descrições traduzidas legadas, garantindo
+// que nenhuma língua volte a exibir "PB." após uma mudança de idioma.
+Object.values(translations).forEach((dictionary) => Object.keys(dictionary).forEach((key) => {
+  if (typeof dictionary[key] === 'string') dictionary[key] = dictionary[key].replaceAll('PB. ', '')
+}))
+
 export function LanguageProvider({ children }) {
   const [language, setLanguage] = useState(() => localStorage.getItem('nandostore-language') || 'pt-BR')
   const activeTranslations = translations[language] || translations.en

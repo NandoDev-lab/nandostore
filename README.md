@@ -1,6 +1,6 @@
 # NandoStore
 
-Portal estático para divulgação dos aplicativos, jogos e e-books de PB. Fernando Saldanha. Construído com React e Vite, sem backend ou login, com dados separados para facilitar uma futura integração com API e painel administrativo.
+Portal estático para divulgação dos aplicativos, jogos e e-books de Fernando Saldanha. Construído com React e Vite, sem backend ou login, com dados separados para facilitar uma futura integração com API e painel administrativo.
 
 ## Instalação
 
@@ -80,7 +80,7 @@ Coloque a foto em `public/images/` e edite `src/data/profile.js`:
 
 ```js
 export const profile = {
-	name: 'PB. Fernando Saldanha',
+	name: 'Fernando Saldanha',
 	biography: 'Sua biografia aqui.',
 	photo: './images/fernando-saldanha.png',
 	socialLinks: [],
