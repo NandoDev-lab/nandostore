@@ -8,6 +8,8 @@ import Detail from './pages/Detail'
 import About from './pages/About'
 import SearchResults from './pages/SearchResults'
 import { allItems as getAllItems } from './utils/catalog'
+import { LanguageProvider } from './i18n/LanguageContext.jsx'
+import { useLanguage } from './i18n/useLanguage'
 import './App.css'
 
 // App é o ponto de composição da aplicação. Estado global, tema e rota ficam
@@ -19,6 +21,11 @@ const catalogItems = getAllItems(apps, ebooks)
 const readHash = () => window.location.hash.slice(2) || 'home'
 
 export default function App() {
+  return <LanguageProvider><AppContent /></LanguageProvider>
+}
+
+function AppContent() {
+  const { t } = useLanguage()
   const [theme, setTheme] = useState(() => localStorage.getItem('nandostore-theme') || 'light')
   const [query, setQuery] = useState('')
   const [route, setRoute] = useState(readHash)
@@ -66,5 +73,5 @@ export default function App() {
           : query ? <main><SearchResults items={catalogItems} query={query} onOpen={openItem} /></main>
             : <Home apps={apps} ebooks={ebooks} onOpen={openItem} onNavigate={navigate} />
 
-  return <div className="app-shell"><Header query={query} setQuery={setQuery} theme={theme} setTheme={setTheme} onNavigate={navigate} />{content}<footer><span>© {new Date().getFullYear()} NandoStore</span><span>Projetos de PB. Fernando Saldanha</span><button onClick={() => navigate('about')}>Sobre o portal ↗</button></footer></div>
+  return <div className="app-shell"><Header query={query} setQuery={setQuery} theme={theme} setTheme={setTheme} onNavigate={navigate} />{content}<footer><span>© {new Date().getFullYear()} NandoStore</span><span>{t('footer')}</span><button onClick={() => navigate('about')}>{t('aboutPortal')} ↗</button></footer></div>
 }
