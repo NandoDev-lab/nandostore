@@ -1,5 +1,7 @@
 import ProductCard from '../components/ProductCard'
+import ProjectShowcase from '../components/ProjectShowcase'
 import Section from '../components/Section'
+import { accountingAutomationProjects, githubWebsiteProjects } from '../data/projects'
 
 // A home combina blocos editoriais. Os dados continuam fora desta página,
 // permitindo trocar a fonte por uma API sem reescrever a apresentação.
@@ -11,5 +13,7 @@ export default function Home({ apps, ebooks, onOpen, onNavigate }) {
     <Section title="Mais recentes" kicker="Catálogo"><div className="product-grid">{recent.map((item) => <ProductCard key={item.id} item={item} onOpen={onOpen} />)}</div></Section>
     <section className="split-banner"><div><span className="eyebrow">EM BREVE</span><h2>Uma biblioteca para<br /><em>pausar e pensar.</em></h2></div><div className="banner-book"><span>G</span><strong>Gatilhos<br />do pecado</strong><small>PB. Fernando Saldanha</small></div><button className="button light" onClick={() => onOpen(ebooks[0])}>Ver e-book <span>↗</span></button></section>
     <Section title="Meus projetos" kicker="Universo NandoStore" action={<button className="text-button" onClick={() => onNavigate('apps')}>Ver catálogo completo ↗</button>}><div className="project-strip">{apps.map((item, index) => <button key={item.id} className="project-chip" onClick={() => onOpen(item)}><span className={`mini-symbol symbol-${index % 4}`}>{item.name.slice(0, 1)}</span><span>{item.name}</span></button>)}</div></Section>
+    <ProjectShowcase eyebrow="AUTOMAÇÃO CONTÁBIL" title="Automação contábil com Python" description="Demonstrações de ferramentas e fluxos de automação para rotinas contábeis." projects={accountingAutomationProjects} icon="Py" />
+    <ProjectShowcase eyebrow="WEB NO GITHUB" title="Sites criados no GitHub" description="Uma vitrine para sites desenvolvidos e publicados através do GitHub." projects={githubWebsiteProjects} icon="<>" />
   </main>
 }
