@@ -17,6 +17,8 @@ const translations = {
 Object.assign(translations, additionalTranslations)
 translations['pt-BR'].life = 'vida.'
 translations['pt-BR'].connector = 'e'
+translations.en.life = 'life.'
+translations.en.connector = 'and'
 
 export function LanguageProvider({ children }) {
   const [language, setLanguage] = useState(() => localStorage.getItem('nandostore-language') || 'pt-BR')
