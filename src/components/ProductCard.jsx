@@ -13,7 +13,7 @@ export default function ProductCard({ item, onOpen }) {
       <h3>{item.name}</h3>
       <p>{item.description || t('pendingDescription')}</p>
       <div className="card-meta"><span>{item.category || t('pendingCategory')}</span><span>{item.platform || t('pending')}</span></div>
-      <button className="text-button" onClick={() => onOpen(item)}>{t('details')} <span aria-hidden="true">↗</span></button>
+      <div className="card-actions"><button className="text-button" onClick={() => onOpen(item)}>{t('details')} <span aria-hidden="true">↗</span></button>{item.googlePlay && <a className="text-button" href={item.googlePlay} target="_blank" rel="noreferrer">Google Play <span aria-hidden="true">↗</span></a>}</div>
     </div>
   </article>
 }
