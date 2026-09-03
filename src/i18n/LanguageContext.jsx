@@ -15,6 +15,9 @@ const translations = {
 }
 
 Object.assign(translations, additionalTranslations)
+const feedbackDefaults = { visits: 'Visits', share: 'Share', close: 'Close', feedbackEyebrow: 'A little support', feedbackTitle: 'Did you like NandoStore?', feedbackDescription: 'A positive rating and a share help more people discover the projects here.', feedbackAppTitle: 'Enjoying this app?', feedbackAppDescription: 'Leave a positive rating for {name} and help the project reach more people.', positiveRating: 'I liked it', rateApp: 'Rate on Google Play', shareSiteText: 'Discover NandoStore and its projects.', shareAppText: 'Discover this app on NandoStore.', copied: 'Link copied', maybeLater: 'Maybe later' }
+Object.values(translations).forEach((dictionary) => Object.assign(dictionary, feedbackDefaults))
+Object.assign(translations['pt-BR'], { visits: 'Visitas', share: 'Compartilhar', close: 'Fechar', feedbackEyebrow: 'Um pequeno apoio', feedbackTitle: 'Gostou do NandoStore?', feedbackDescription: 'Uma avaliação positiva e um compartilhamento ajudam mais pessoas a conhecer os projetos daqui.', feedbackAppTitle: 'Está gostando deste app?', feedbackAppDescription: 'Deixe uma avaliação positiva para {name} e ajude o projeto a chegar mais longe.', positiveRating: 'Gostei', rateApp: 'Avaliar no Google Play', shareSiteText: 'Conheça o NandoStore e seus projetos.', shareAppText: 'Conheça este app no NandoStore.', copied: 'Link copiado', maybeLater: 'Talvez depois' })
 translations['pt-BR'].life = 'vida.'
 translations['pt-BR'].connector = 'e'
 translations.en.life = 'life.'

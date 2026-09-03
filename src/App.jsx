@@ -7,6 +7,7 @@ import Catalog from './pages/Catalog'
 import Detail from './pages/Detail'
 import About from './pages/About'
 import SearchResults from './pages/SearchResults'
+import FeedbackModal from './components/FeedbackModal'
 import { allItems as getAllItems } from './utils/catalog'
 import { LanguageProvider } from './i18n/LanguageContext.jsx'
 import { useLanguage } from './i18n/useLanguage'
@@ -30,6 +31,22 @@ function AppContent() {
   const [query, setQuery] = useState('')
   const [route, setRoute] = useState(readHash)
   const [selected, setSelected] = useState(null)
+  const [visits] = useState(() => Number(localStorage.getItem('nandostore-visits') || 0) + 1)
+  const [feedbackOpen, setFeedbackOpen] = useState(false)
+  const [feedbackItem, setFeedbackItem] = useState(null)
+
+  useEffect(() => {
+    localStorage.setItem('nandostore-visits', String(visits))
+  }, [visits])
+
+  useEffect(() => {
+    if (localStorage.getItem('nandostore-feedback-seen')) return undefined
+    const timer = window.setTimeout(() => {
+      setFeedbackOpen(true)
+      localStorage.setItem('nandostore-feedback-seen', 'true')
+    }, 3500)
+    return () => window.clearTimeout(timer)
+  }, [])
 
   // Persistir o tema no navegador mantém a preferência entre visitas sem
   // exigir backend ou conta de usuário.
@@ -65,13 +82,18 @@ function AppContent() {
     window.scrollTo({ top: 0, behavior: 'smooth' })
   }
 
+  const openFeedback = (item = null) => {
+    setFeedbackItem(item)
+    setFeedbackOpen(true)
+  }
+
   const content = selected
-    ? <Detail item={selected} onBack={() => navigate('home')} />
+    ? <Detail item={selected} onBack={() => navigate('home')} onFeedback={() => openFeedback(selected)} />
     : route === 'apps' ? <Catalog type="apps" apps={apps} ebooks={ebooks} onOpen={openItem} />
       : route === 'ebooks' ? <Catalog type="ebooks" apps={apps} ebooks={ebooks} onOpen={openItem} />
         : route === 'about' ? <About />
           : query ? <main><SearchResults items={catalogItems} query={query} onOpen={openItem} /></main>
             : <Home apps={apps} ebooks={ebooks} onOpen={openItem} onNavigate={navigate} />
 
-  return <div className="app-shell"><Header query={query} setQuery={setQuery} theme={theme} setTheme={setTheme} onNavigate={navigate} />{content}<footer><span>© {new Date().getFullYear()} NandoStore</span><span>{t('footer')}</span><button onClick={() => navigate('about')}>{t('aboutPortal')} ↗</button></footer></div>
+  return <div className="app-shell"><Header query={query} setQuery={setQuery} theme={theme} setTheme={setTheme} onNavigate={navigate} />{content}<footer><span>© {new Date().getFullYear()} NandoStore</span><span>{t('footer')}</span><span className="visit-counter">{t('visits')}: {visits}</span><button onClick={() => openFeedback()}>{t('share')} ↗</button><button onClick={() => navigate('about')}>{t('aboutPortal')} ↗</button></footer><FeedbackModal item={feedbackItem} open={feedbackOpen} onClose={() => setFeedbackOpen(false)} /></div>
 }
