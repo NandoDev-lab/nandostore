@@ -99,14 +99,14 @@ Enquanto `photo` ou `biography` estiverem vazios, a página exibirá o placehold
 - Tema claro/escuro persistido em `localStorage`.
 - Layout responsivo, foco visível, HTML semântico e textos alternativos.
 - SEO básico, `robots.txt`, `sitemap.xml` editável e favicon.
-- Seletor instantâneo de idioma entre Português (Brasil) e English, persistido no navegador.
+- Seletor instantâneo de idioma entre Português (Brasil), English, Español, Deutsch, Русский e Français, persistido no navegador.
 
 ## Idiomas
 
-O seletor de idioma fica no cabeçalho. A troca acontece instantaneamente, sem recarregar a página, e a preferência é salva em `localStorage`.
+O seletor de idioma fica no cabeçalho. A troca acontece instantaneamente, sem recarregar a página, e a preferência é salva em `localStorage`. Os seis idiomas disponíveis possuem dicionário próprio para a interface.
 
-As traduções da interface ficam em `src/i18n/LanguageContext.jsx`. Para adicionar outro idioma, crie uma nova chave no objeto `translations` com o mesmo conjunto de chaves de `pt-BR` e adicione uma opção no seletor de `src/components/Header.jsx`. O conteúdo dos projetos e os nomes próprios continuam nos arquivos de dados, independentemente do idioma da interface.
+As traduções principais ficam em `src/i18n/LanguageContext.jsx` e as traduções adicionais em `src/i18n/additionalTranslations.js`. Para adicionar outro idioma, crie uma nova chave com o mesmo conjunto de chaves e adicione uma opção em `src/i18n/languages.js`. O conteúdo dos projetos e os nomes próprios continuam nos arquivos de dados, independentemente do idioma da interface.
 
-Não é tecnicamente possível garantir tradução manual de todos os idiomas existentes em um site estático. A arquitetura, porém, aceita qualquer quantidade de idiomas sem alterar as páginas ou os componentes.
+Novos idiomas podem ser adicionados sem alterar as páginas ou os componentes. Para obter tradução automática de idiomas adicionais, seria necessário integrar um serviço externo de tradução.
 
 O sitemap contém placeholders para usuário e repositório: atualize `public/sitemap.xml` antes da publicação.
