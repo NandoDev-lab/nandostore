@@ -9,6 +9,7 @@ footer { max-width: 1240px; margin: auto; padding: 26px 32px; border-top: 1px so
 @media (max-width: 480px) { .header-actions { width: 100%; }.search { flex: 1; width: auto; }.hero h1 { font-size: 53px; }.hero-actions { flex-direction: column; align-items: stretch; }.featured-grid, .product-grid { grid-template-columns: 1fr; }.section-heading { align-items: start; gap: 15px; flex-direction: column; }.content-section { padding-top: 55px; }.product-copy p { height: auto; min-height: 42px; }.split-banner { margin-top: 60px; }.split-banner .button { width: 100%; }.hero-card.front { right: 10px; }.hero-card.back { left: 20px; } }
 .construction-banner { padding: 8px 12px; background: var(--yellow); color: var(--ink); font: 700 10px 'Space Grotesk', sans-serif; letter-spacing: .14em; text-transform: uppercase; }
 .detail-banner { display: inline-block; margin-bottom: 18px; }
+.about-photo { width: 100%; height: 100%; object-fit: cover; }
 .project-showcase { margin: 20px 0 32px; padding: 34px 0 42px; border-top: 1px solid var(--line); border-bottom: 1px solid var(--line); }
 .showcase-heading { display: flex; gap: 18px; align-items: flex-start; margin-bottom: 24px; }
 .showcase-icon { width: 44px; height: 44px; display: grid; place-items: center; flex: 0 0 auto; background: var(--blue); color: #fff; font: 700 14px 'Space Grotesk', sans-serif; }

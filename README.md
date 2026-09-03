@@ -39,11 +39,56 @@ O Vite usa `base: './'` e a navegação usa hash (`#/apps`, `#/ebooks`), então 
 
 - `src/data/apps.js`: aplicativos e jogos.
 - `src/data/ebooks.js`: e-books, incluindo campos de compra, PDF, amostra, ISBN e editora.
+- `src/data/profile.js`: nome, biografia, foto e links da página Sobre.
 - `src/data/categories.js`: filtros do catálogo.
 - `public/images/apps/`: ícones e screenshots reais.
 - `public/images/ebooks/`: capas, PDFs e amostras.
 
 Os campos ainda não informados aparecem como **Pendente** ou **Descrição pendente** sem quebrar a interface. Substitua os campos vazios pelos caminhos relativos dos arquivos, por exemplo `./images/apps/meu-icone.png`.
+
+## Como atualizar imagens
+
+### Imagens dos aplicativos
+
+1. Coloque o ícone e as screenshots em `public/images/apps/`.
+2. Abra `src/data/apps.js` e preencha `icon` com o caminho do ícone.
+3. Preencha `screenshots` com uma lista dos caminhos das telas.
+
+Exemplo:
+
+```js
+icon: './images/apps/esboco-facil-icone.png',
+screenshots: [
+	'./images/apps/esboco-facil-tela-01.png',
+	'./images/apps/esboco-facil-tela-02.png',
+],
+```
+
+Use o mesmo padrão para qualquer aplicativo ou jogo. Os caminhos começam com `./` porque o site é publicado em um subdiretório do GitHub Pages.
+
+### Capa do e-book
+
+Coloque a capa em `public/images/ebooks/` e preencha o campo `cover` no objeto correspondente em `src/data/ebooks.js`:
+
+```js
+cover: './images/ebooks/gatilhos-do-pecado-capa.png',
+```
+
+### Foto e conteúdo da página Sobre
+
+Coloque a foto em `public/images/` e edite `src/data/profile.js`:
+
+```js
+export const profile = {
+	name: 'PB. Fernando Saldanha',
+	biography: 'Sua biografia aqui.',
+	photo: './images/fernando-saldanha.png',
+	socialLinks: [],
+	professionalLinks: [],
+}
+```
+
+Enquanto `photo` ou `biography` estiverem vazios, a página exibirá o placeholder e o aviso correspondente. Depois de alterar arquivos, execute `npm run build` e faça `git add .`, `git commit` e `git push` para publicar.
 
 ## Recursos incluídos
 
