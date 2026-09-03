@@ -10,6 +10,7 @@ footer { max-width: 1240px; margin: auto; padding: 26px 32px; border-top: 1px so
 .construction-banner { padding: 8px 12px; background: var(--yellow); color: var(--ink); font: 700 10px 'Space Grotesk', sans-serif; letter-spacing: .14em; text-transform: uppercase; }
  .detail-banner { display: inline-block; margin-bottom: 18px; }
 .item-art { object-fit: contain; }
+.product-card .item-art { height: auto; object-fit: initial; display: block; }
  .language-select { max-width: 92px; padding: 8px 5px; border: 1px solid var(--line); border-radius: 4px; color: var(--ink); background: var(--surface); font-size: 11px; }
 .about-photo { width: 100%; height: 100%; object-fit: cover; }
 .project-showcase { margin: 20px 0 32px; padding: 34px 0 42px; border-top: 1px solid var(--line); border-bottom: 1px solid var(--line); }
