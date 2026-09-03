@@ -14,3 +14,14 @@ export const searchItems = (items, query) => {
 // O filtro de tipo é aplicado apenas ao catálogo de aplicativos; e-books têm
 // sua própria página e, por isso, não passam por esta função.
 export const filterApps = (apps, filter) => apps.filter((item) => filter === 'all' || item.type === filter)
+
+// A data de edição tem prioridade sobre a data de criação. Datas vazias ficam
+// depois das cadastradas para que itens sem informação não sejam inventados.
+export const sortByRecent = (items) => [...items].sort((first, second) => {
+  const firstDate = first.updatedAt || first.createdAt
+  const secondDate = second.updatedAt || second.createdAt
+  if (!firstDate && !secondDate) return 0
+  if (!firstDate) return 1
+  if (!secondDate) return -1
+  return new Date(secondDate) - new Date(firstDate)
+})
