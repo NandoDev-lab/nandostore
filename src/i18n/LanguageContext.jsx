@@ -1,5 +1,6 @@
 import { useEffect, useMemo, useState } from 'react'
 import { LanguageContext } from './languageContext.js'
+import { supportedLanguages } from './languages.js'
 
 // Textos da interface ficam concentrados aqui para que uma nova língua possa
 // ser adicionada sem duplicar componentes ou espalhar condicionais pelo JSX.
@@ -14,7 +15,8 @@ const translations = {
 
 export function LanguageProvider({ children }) {
   const [language, setLanguage] = useState(() => localStorage.getItem('nandostore-language') || 'pt-BR')
-  const value = useMemo(() => ({ language, setLanguage, t: (key) => translations[language][key] || translations['pt-BR'][key] || key, languages: translations }), [language])
+  const activeTranslations = translations[language] || translations.en
+  const value = useMemo(() => ({ language, setLanguage, t: (key) => activeTranslations[key] || translations.en[key] || key, languages: supportedLanguages }), [activeTranslations, language])
 
   useEffect(() => { localStorage.setItem('nandostore-language', language); document.documentElement.lang = language }, [language])
   return <LanguageContext.Provider value={value}>{children}</LanguageContext.Provider>
