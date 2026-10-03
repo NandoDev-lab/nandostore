@@ -16,6 +16,8 @@ import './App.css'
 // App é o ponto de composição da aplicação. Estado global, tema e rota ficam
 // aqui; cada regra visual e página mora em seu próprio módulo.
 const catalogItems = getAllItems(apps, ebooks)
+const ebooksWithCovers = ebooks.filter((item) => item.cover)
+const bannerBookStorageKey = 'nandostore-banner-book'
 
 // O hash evita erro 404 ao recarregar páginas em hospedagem estática. O formato
 // /app/id e /ebook/id também torna cada detalhe compartilhável por URL.
@@ -31,6 +33,13 @@ function AppContent() {
   const [query, setQuery] = useState('')
   const [route, setRoute] = useState(readHash)
   const [selected, setSelected] = useState(null)
+  const [bannerBook] = useState(() => {
+    if (!ebooksWithCovers.length) return null
+
+    const previousBookId = localStorage.getItem(bannerBookStorageKey)
+    const previousIndex = ebooksWithCovers.findIndex((item) => item.id === previousBookId)
+    return ebooksWithCovers[(previousIndex + 1) % ebooksWithCovers.length]
+  })
   const [visits] = useState(() => Number(localStorage.getItem('nandostore-visits') || 0) + 1)
   const [feedbackOpen, setFeedbackOpen] = useState(false)
   const [feedbackItem, setFeedbackItem] = useState(null)
@@ -38,6 +47,10 @@ function AppContent() {
   useEffect(() => {
     localStorage.setItem('nandostore-visits', String(visits))
   }, [visits])
+
+  useEffect(() => {
+    if (bannerBook) localStorage.setItem(bannerBookStorageKey, bannerBook.id)
+  }, [bannerBook])
 
   useEffect(() => {
     if (localStorage.getItem('nandostore-feedback-seen')) return undefined
@@ -93,7 +106,7 @@ function AppContent() {
       : route === 'ebooks' ? <Catalog type="ebooks" apps={apps} ebooks={ebooks} onOpen={openItem} />
         : route === 'about' ? <About />
           : query ? <main><SearchResults items={catalogItems} query={query} onOpen={openItem} /></main>
-            : <Home apps={apps} ebooks={ebooks} onOpen={openItem} onNavigate={navigate} />
+            : <Home apps={apps} ebooks={ebooks} bannerBook={bannerBook} onOpen={openItem} onNavigate={navigate} />
 
   return <div className="app-shell"><Header query={query} setQuery={setQuery} theme={theme} setTheme={setTheme} onNavigate={navigate} />{content}<footer><span>© {new Date().getFullYear()} NandoStore</span><span>{t('footer')}</span><span className="visit-counter">{t('visits')}: {visits}</span><button onClick={() => openFeedback()}>{t('share')} ↗</button><button onClick={() => navigate('about')}>{t('aboutPortal')} ↗</button></footer><FeedbackModal item={feedbackItem} open={feedbackOpen} onClose={() => setFeedbackOpen(false)} /></div>
 }

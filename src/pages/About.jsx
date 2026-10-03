@@ -1,40 +1,63 @@
 import { profile } from '../data/profile'
 import { useLanguage } from '../i18n/useLanguage.js'
 import ReactMarkdown from 'react-markdown'
+import { FaEnvelope, FaGithub, FaLinkedinIn } from 'react-icons/fa'
+
+const profileIcons = {
+  GitHub: FaGithub,
+  LinkedIn: FaLinkedinIn,
+  'E-mail': FaEnvelope,
+}
 
 // Página institucional com os dados do autor.
 export default function About() {
-  const { t } = useLanguage()
+  const { t, language } = useLanguage()
+  const biography = profile.biographyTranslations[language] || profile.biography
 
   return (
     <main className="about-page">
-      <span className="eyebrow">{t('aboutAuthor')}</span>
+      <div className="about-profile">
+        <div className="about-visual">
+          <div className="about-portrait">
+            {profile.photo ? (
+              <img
+                className="about-photo"
+                src={profile.photo}
+                alt={profile.name}
+              />
+            ) : (
+              'FS'
+            )}
+          </div>
 
-      <h1>
-        Fernando<br />
-        <em>Saldanha</em>
-      </h1>
-
-      <div className="about-content">
-        <div className="portrait-placeholder">
-          {profile.photo ? (
-            <img
-              className="about-photo"
-              src={profile.photo}
-              alt={profile.name}
-            />
-          ) : (
-            'FS'
-          )}
+          <div className="profile-links">
+            {[...profile.socialLinks, ...profile.professionalLinks].map((link) => {
+              const Icon = profileIcons[link.label]
+              return (
+                <a
+                  key={link.label}
+                  href={link.href}
+                  target={link.href.startsWith('mailto:') ? undefined : '_blank'}
+                  rel={link.href.startsWith('mailto:') ? undefined : 'noreferrer'}
+                  aria-label={link.label}
+                  title={link.label}
+                >
+                  <Icon aria-hidden="true" />
+                </a>
+              )
+            })}
+          </div>
         </div>
 
-        <div>
+        <section className="about-copy">
+          <span className="eyebrow">{t('aboutAuthor')}</span>
+          <h1>Fernando <em>Saldanha</em></h1>
           <h2>{t('aboutTitle')}</h2>
 
-          {profile.biography ? (
+          {biography ? (
             <div className="biography">
               <ReactMarkdown>
-                {profile.biography}
+                {biography}
               </ReactMarkdown>
             </div>
           ) : (
@@ -42,7 +65,7 @@ export default function About() {
           )}
 
           <div className="pending-list">
-            {!profile.biography && (
+            {!biography && (
               <span>{t('pendingBiography')}</span>
             )}
 
@@ -58,7 +81,7 @@ export default function About() {
               <span>{t('pendingContact')}</span>
             )}
           </div>
-        </div>
+        </section>
       </div>
     </main>
   )
