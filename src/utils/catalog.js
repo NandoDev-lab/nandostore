@@ -1,6 +1,7 @@
 // Reúne operações puras do catálogo. Como estas funções não conhecem React,
 // elas podem ser testadas isoladamente e futuramente substituídas por uma API.
 export const allItems = (apps, ebooks) => [...apps, ...ebooks]
+export const getEbookTitle = (item, language) => item.titleTranslations?.[language] || item.title
 
 // A busca usa todos os valores textuais do cadastro para encontrar nomes,
 // categorias e palavras-chave sem exigir alterações nos componentes visuais.
@@ -8,7 +9,11 @@ export const searchItems = (items, query) => {
   const normalizedQuery = query.trim().toLowerCase()
   if (!normalizedQuery) return items
 
-  return items.filter((item) => Object.values(item).join(' ').toLowerCase().includes(normalizedQuery))
+  return items.filter((item) => {
+    const { titleTranslations = {}, ...searchableFields } = item
+    const searchableText = [...Object.values(searchableFields), ...Object.values(titleTranslations)].join(' ').toLowerCase()
+    return searchableText.includes(normalizedQuery)
+  })
 }
 
 // O filtro de tipo é aplicado apenas ao catálogo de aplicativos; e-books têm

@@ -1,12 +1,13 @@
 import { profile } from '../data/profile'
 import { useLanguage } from '../i18n/useLanguage.js'
 import ReactMarkdown from 'react-markdown'
-import { FaEnvelope, FaGithub, FaLinkedinIn } from 'react-icons/fa'
+import { FaEnvelope, FaGithub, FaLinkedinIn, FaWhatsapp } from 'react-icons/fa'
 
 const profileIcons = {
   GitHub: FaGithub,
   LinkedIn: FaLinkedinIn,
   'E-mail': FaEnvelope,
+  WhatsApp: FaWhatsapp,
 }
 
 // Página institucional com os dados do autor.

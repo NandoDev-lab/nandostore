@@ -152,6 +152,7 @@ Mon parcours réunit **logiciel, automatisation et analyse** afin de transformer
 
   socialLinks: [
     { label: 'GitHub', href: 'https://github.com/NandoDev-lab' },
+    { label: 'WhatsApp', href: 'https://wa.me/5512996286354' },
   ],
 
   professionalLinks: [

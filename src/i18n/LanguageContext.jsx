@@ -15,6 +15,39 @@ const translations = {
 }
 
 Object.assign(translations, additionalTranslations)
+const originalLanguageLabels = {
+  'pt-BR': 'Idioma Original: Português do Brasil',
+  en: 'Original language: Brazilian Portuguese',
+  es: 'Idioma original: portugués de Brasil',
+  de: 'Originalsprache: brasilianisches Portugiesisch',
+  ru: 'Исходный язык: бразильский португальский',
+  fr: 'Langue d’origine : portugais du Brésil',
+}
+Object.entries(originalLanguageLabels).forEach(([language, label]) => {
+  translations[language].originalLanguage = label
+})
+const ebookPlatformLabels = {
+  'pt-BR': { availableAt: 'Disponível em:', unpublished: 'Ainda não publicado' },
+  en: { availableAt: 'Available on:', unpublished: 'Not published yet' },
+  es: { availableAt: 'Disponible en:', unpublished: 'Aún no publicado' },
+  de: { availableAt: 'Verfügbar bei:', unpublished: 'Noch nicht veröffentlicht' },
+  ru: { availableAt: 'Доступно на:', unpublished: 'Ещё не опубликовано' },
+  fr: { availableAt: 'Disponible sur :', unpublished: 'Pas encore publié' },
+}
+Object.entries(ebookPlatformLabels).forEach(([language, labels]) => {
+  Object.assign(translations[language], labels)
+})
+const continueReadingLabels = {
+  'pt-BR': 'Continuar lendo...',
+  en: 'Continue reading...',
+  es: 'Continuar leyendo...',
+  de: 'Weiterlesen...',
+  ru: 'Читать далее...',
+  fr: 'Continuer la lecture...',
+}
+Object.entries(continueReadingLabels).forEach(([language, label]) => {
+  translations[language].continueReading = label
+})
 const feedbackDefaults = { visits: 'Visits', share: 'Share', close: 'Close', feedbackEyebrow: 'A little support', feedbackTitle: 'Did you like NandoStore?', feedbackDescription: 'A positive rating and a share help more people discover the projects here.', feedbackAppTitle: 'Enjoying this app?', feedbackAppDescription: 'Leave a positive rating for {name} and help the project reach more people.', positiveRating: 'I liked it', rateApp: 'Rate on Google Play', shareSiteText: 'Discover NandoStore and its projects.', shareAppText: 'Discover this app on NandoStore.', copied: 'Link copied', maybeLater: 'Maybe later' }
 Object.values(translations).forEach((dictionary) => Object.assign(dictionary, feedbackDefaults))
 Object.assign(translations['pt-BR'], { visits: 'Visitas', share: 'Compartilhar', close: 'Fechar', feedbackEyebrow: 'Um pequeno apoio', feedbackTitle: 'Gostou do NandoStore?', feedbackDescription: 'Uma avaliação positiva e um compartilhamento ajudam mais pessoas a conhecer os projetos daqui.', feedbackAppTitle: 'Está gostando deste app?', feedbackAppDescription: 'Deixe uma avaliação positiva para {name} e ajude o projeto a chegar mais longe.', positiveRating: 'Gostei', rateApp: 'Avaliar no Google Play', shareSiteText: 'Conheça o NandoStore e seus projetos.', shareAppText: 'Conheça este app no NandoStore.', copied: 'Link copiado', maybeLater: 'Talvez depois' })

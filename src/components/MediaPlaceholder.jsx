@@ -2,9 +2,9 @@ import { useState } from 'react'
 
 // Renderiza a imagem cadastrada ou um estado visual previsível quando o arquivo
 // ainda não existe. Assim, um cadastro incompleto nunca quebra o layout.
-export default function MediaPlaceholder({ item, large = false }) {
+export default function MediaPlaceholder({ item, large = false, label: labelOverride }) {
   const image = item.icon || item.cover
-  const label = item.name || item.title
+  const label = labelOverride || item.name || item.title
   const [imageFailed, setImageFailed] = useState(false)
 
   if (image && !imageFailed) {

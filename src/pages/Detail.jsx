@@ -9,7 +9,7 @@ export default function Detail({ item, onBack, onFeedback }) {
   const { t, language } = useLanguage()
   const isBook = item.type === 'ebook'
   const title = isBook ? getEbookTitle(item, language) : item.name || item.title
-  const fields = isBook ? [['Autor', item.author], ['Categoria', item.category], ['Páginas', item.pages], ['Formato', item.format], ['ISBN', item.isbn], ['Editora', item.publisher]] : [['Categoria', item.category], ['Plataforma', item.platform], ['Status', item.status], ['Versão', item.version], ['Tamanho', item.size], ['Atualização', item.updatedAt]]
+  const fields = isBook ? [['Autor', item.author], ['Categoria', item.category], ['Formato', item.format], [t('availableAt'), item.platform || t('unpublished')]] : [['Categoria', item.category], ['Plataforma', item.platform], ['Status', item.status], ['Versão', item.version], ['Tamanho', item.size], ['Atualização', item.updatedAt]]
   return (
     <main className="detail-page">
       <button className="back-button" onClick={onBack}>← {t('back')}</button>
@@ -35,7 +35,7 @@ export default function Detail({ item, onBack, onFeedback }) {
       <div className="detail-body">
         <div>
           <h2>{isBook ? t('synopsis') : t('aboutProject')}</h2>
-          <p>{isBook ? item.synopsis : item.fullDescription || t('unavailable')}</p>
+          <p>{isBook ? item.synopsis : item.fullDescription || item.description || t('unavailable')}</p>
         </div>
         <aside>
           <h3>{t('information')}</h3>
