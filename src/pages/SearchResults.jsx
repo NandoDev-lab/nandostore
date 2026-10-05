@@ -4,8 +4,8 @@ import Section from '../components/Section'
 import { searchItems } from '../utils/catalog'
 import { useLanguage } from '../i18n/useLanguage.js'
 
-// A página de pesquisa recebe a lista já carregada e só cuida da apresentação.
-// A regra de correspondência fica em utils/catalog.js para ser reaproveitada.
+// Recebe a lista já carregada pelo App. A busca e a normalização ficam em
+// catalog.js, incluindo os títulos traduzidos dos e-books.
 export default function SearchResults({ items, query, onOpen }) {
   const { t } = useLanguage()
   const results = searchItems(items, query)

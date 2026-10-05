@@ -3,8 +3,9 @@ import MediaPlaceholder from '../components/MediaPlaceholder'
 import { useLanguage } from '../i18n/useLanguage.js'
 import { getEbookTitle } from '../utils/catalog.js'
 
-// A página de detalhes é orientada pelos campos do item. A distinção entre
-// e-book e aplicativo fica concentrada aqui, evitando condicionais espalhadas.
+// Renderiza campos e ações conforme `item.type`. Links vazios não geram botões;
+// para e-books, o título acompanha o idioma e a plataforma de venda substitui
+// metadados editoriais que não são usados pelo catálogo atual.
 export default function Detail({ item, onBack, onFeedback }) {
   const { t, language } = useLanguage()
   const isBook = item.type === 'ebook'

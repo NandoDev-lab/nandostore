@@ -1,3 +1,4 @@
+/** Renderiza uma ação externa somente quando há um destino utilizável. */
 export default function LinkButton({ href, children }) {
   if (!href) return null
 

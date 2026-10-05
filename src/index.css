@@ -1,3 +1,5 @@
+/* Base global compartilhada por todas as páginas. As cores de tema e os
+	componentes específicos ficam em App.css. */
 @import url('https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;600;700&family=Space+Grotesk:wght@400;500;600;700&display=swap');
 :root { font-family: 'DM Sans', sans-serif; color: #20252b; background: #f4f1eb; font-synthesis: none; text-rendering: optimizeLegibility; -webkit-font-smoothing: antialiased; }
 :root[data-theme='dark'] { color: #e8e5de; background: #171a1c; }

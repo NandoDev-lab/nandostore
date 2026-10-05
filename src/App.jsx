@@ -16,6 +16,7 @@ import './App.css'
 // App é o ponto de composição da aplicação. Estado global, tema e rota ficam
 // aqui; cada regra visual e página mora em seu próprio módulo.
 const catalogItems = getAllItems(apps, ebooks)
+// O banner só pode alternar entre e-books que realmente possuem capa.
 const ebooksWithCovers = ebooks.filter((item) => item.cover)
 const bannerBookStorageKey = 'nandostore-banner-book'
 
@@ -27,12 +28,16 @@ export default function App() {
   return <LanguageProvider><AppContent /></LanguageProvider>
 }
 
+// Mantém efeitos globais e navegação no mesmo componente, enquanto as páginas
+// recebem somente os dados e callbacks necessários para renderizar seu conteúdo.
 function AppContent() {
   const { t } = useLanguage()
   const [theme, setTheme] = useState(() => localStorage.getItem('nandostore-theme') || 'light')
   const [query, setQuery] = useState('')
   const [route, setRoute] = useState(readHash)
   const [selected, setSelected] = useState(null)
+  // A última capa fica salva para que cada nova carga escolha a próxima, sem
+  // avançar durante uma simples navegação entre páginas.
   const [bannerBook] = useState(() => {
     if (!ebooksWithCovers.length) return null
 
@@ -44,6 +49,8 @@ function AppContent() {
   const [feedbackOpen, setFeedbackOpen] = useState(false)
   const [feedbackItem, setFeedbackItem] = useState(null)
 
+  // Cada valor usa uma chave própria para sobreviver a recargas sem misturar
+  // preferências de tema, idioma, contador ou estado do modal.
   useEffect(() => {
     localStorage.setItem('nandostore-visits', String(visits))
   }, [visits])
@@ -91,6 +98,7 @@ function AppContent() {
   }
 
   const openItem = (item) => {
+    // O formato /tipo/id permite abrir e compartilhar diretamente um detalhe.
     window.location.hash = `/${item.type}/${item.id}`
     window.scrollTo({ top: 0, behavior: 'smooth' })
   }

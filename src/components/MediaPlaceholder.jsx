@@ -1,7 +1,7 @@
 import { useState } from 'react'
 
-// Renderiza a imagem cadastrada ou um estado visual previsível quando o arquivo
-// ainda não existe. Assim, um cadastro incompleto nunca quebra o layout.
+// Renderiza icon/cover e troca para uma inicial se o arquivo estiver ausente ou
+// falhar no carregamento. `label` permite usar o título já localizado pelo pai.
 export default function MediaPlaceholder({ item, large = false, label: labelOverride }) {
   const image = item.icon || item.cover
   const label = labelOverride || item.name || item.title

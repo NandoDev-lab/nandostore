@@ -1,6 +1,7 @@
 // Catálogos independentes de projetos demonstráveis. Eles ficam separados de
 // apps.js porque representam portfólio técnico, não produtos publicados.
-// Adicione um objeto a uma das listas quando houver uma demonstração real.
+// Cada registro deve ter id/name/description e pode incluir technologies,
+// repository, demo e image. Adicione somente demonstrações reais.
 export const accountingAutomationProjects = [
   // Exemplo de estrutura:
   // {

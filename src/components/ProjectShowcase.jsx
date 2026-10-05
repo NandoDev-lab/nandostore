@@ -1,8 +1,8 @@
 import { useLanguage } from '../i18n/useLanguage.js'
 
-// Apresenta uma categoria de portfólio técnico sem misturá-la ao catálogo de
-// apps e e-books. A lista vazia é um estado válido enquanto os projetos não
-// forem cadastrados, evitando cards com informações inventadas.
+// Recebe uma lista com id, name, description, technologies, repository e demo.
+// A lista vazia é intencional até que existam projetos e demonstrações reais;
+// assim a interface orienta o cadastro sem inventar conteúdo.
 export default function ProjectShowcase({ eyebrow, title, description, projects, icon }) {
   const { t } = useLanguage()
   return <section className="project-showcase">

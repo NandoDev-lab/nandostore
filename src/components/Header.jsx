@@ -1,8 +1,8 @@
 import { supportedLanguages } from '../i18n/languages.js'
 import { useLanguage } from '../i18n/useLanguage.js'
 
-// Cabeçalho global: recebe estado e callbacks do App, mas não decide rotas.
-// Essa fronteira deixa a navegação simples de trocar por React Router no futuro.
+// Recebe busca, tema e callback de navegação controlados pelo App. O seletor
+// grava o idioma pelo provider; este componente não mantém estado local próprio.
 export default function Header({ query, setQuery, theme, setTheme, onNavigate }) {
   const { language, setLanguage, t } = useLanguage()
   return <header className="site-header">

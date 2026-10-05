@@ -1,3 +1,7 @@
+// Catálogo estático de e-books. `title` preserva o original em português e
+// `titleTranslations` contém versões opcionais indexadas pelos códigos de i18n.
+// `platform` identifica a loja; `purchaseLink`, `pdf` e `sample` são destinos
+// opcionais independentes e só devem ser preenchidos com URLs/arquivos válidos.
 export const ebooks = [
   {
     id: 'gatilhos-do-pecado',

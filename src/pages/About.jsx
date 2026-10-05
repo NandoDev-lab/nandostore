@@ -10,9 +10,11 @@ const profileIcons = {
   WhatsApp: FaWhatsapp,
 }
 
-// Página institucional com os dados do autor.
+// Página institucional. As chaves de profileIcons devem corresponder aos
+// rótulos armazenados em socialLinks/professionalLinks no perfil.
 export default function About() {
   const { t, language } = useLanguage()
+  // Se não houver tradução específica do perfil, preserva o texto original.
   const biography = profile.biographyTranslations[language] || profile.biography
 
   return (

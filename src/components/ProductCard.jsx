@@ -5,6 +5,8 @@ import { useLanguage } from '../i18n/useLanguage.js'
 // navegação fora do componente, facilitando reutilização e testes.
 export default function ProductCard({ item, onOpen }) {
   const { t } = useLanguage()
+  // A descrição completa alimenta a prévia quando cadastrada; o resumo é usado
+  // como fallback. O limite reduz quebra de altura entre cards da mesma grade.
   const fullDescription = item.fullDescription || item.description
   const description = fullDescription || t('pendingDescription')
   const shouldContinueReading = Boolean(fullDescription) && fullDescription.length > 90

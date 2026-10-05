@@ -1,3 +1,6 @@
+// Catálogo estático de aplicativos e jogos. `description` é o resumo mostrado
+// no topo do detalhe; `fullDescription` contém o restante do texto da loja.
+// Deixe links e metadados vazios até que o dado exista para não inventar valores.
 export const apps = [
   {
     id: 'esboco-facil',

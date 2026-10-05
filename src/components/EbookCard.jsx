@@ -2,8 +2,8 @@ import MediaPlaceholder from './MediaPlaceholder'
 import { useLanguage } from '../i18n/useLanguage.js'
 import { getEbookTitle } from '../utils/catalog.js'
 
-// Card específico para livros, separado do card de apps porque seus campos
-// principais (autor e formato) pertencem a outro domínio de dados.
+// O título respeita o idioma ativo, com fallback para o título original. O
+// rótulo de idioma original deixa claro que o conteúdo do e-book é em pt-BR.
 export default function EbookCard({ item, onOpen }) {
   const { t, language } = useLanguage()
   const title = getEbookTitle(item, language)

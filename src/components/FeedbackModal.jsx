@@ -1,6 +1,10 @@
 import { useState } from 'react'
 import { useLanguage } from '../i18n/useLanguage.js'
 
+/**
+ * Compartilha o portal ou um item do catálogo. Sem Web Share, tenta copiar a
+ * URL; quando `item` é nulo, o conteúdo compartilhado representa o site.
+ */
 export default function FeedbackModal({ item, open, onClose }) {
   const { t } = useLanguage()
   const [shared, setShared] = useState(false)
@@ -12,6 +16,7 @@ export default function FeedbackModal({ item, open, onClose }) {
 
   const share = async () => {
     const shareData = { title, text: t(isApp ? 'shareAppText' : 'shareSiteText'), url }
+    // Evita um fallback visível quando o usuário cancela o seletor nativo.
     if (navigator.share) await navigator.share(shareData).catch(() => {})
     else {
       await navigator.clipboard?.writeText(url)

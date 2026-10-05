@@ -2,6 +2,10 @@
 
 Portal estático para divulgação dos aplicativos, jogos e e-books de Fernando Saldanha. Construído com React e Vite, sem backend ou login, com dados separados para facilitar uma futura integração com API e painel administrativo.
 
+## Documentação técnica
+
+Consulte [GUIA_TECNICO.md](GUIA_TECNICO.md) para conhecer a arquitetura, o fluxo de navegação, os componentes, os campos dos dados, a internacionalização e os estilos do projeto.
+
 ## Instalação
 
 Pré-requisito: Node.js 20 ou superior.
@@ -38,11 +42,11 @@ O Vite usa `base: './'` e a navegação usa hash (`#/apps`, `#/ebooks`), então 
 ## Onde cadastrar conteúdo
 
 - `src/data/apps.js`: aplicativos e jogos.
-- `src/data/ebooks.js`: e-books, incluindo campos de compra, PDF, amostra, ISBN e editora.
+- `src/data/ebooks.js`: e-books, incluindo títulos traduzidos, capa, plataforma e links de compra, PDF e amostra.
 - `src/data/profile.js`: nome, biografia, foto e links da página Sobre.
 - `src/data/categories.js`: filtros do catálogo.
 - `public/images/apps/`: ícones e screenshots reais.
-- `public/images/ebooks/`: capas, PDFs e amostras.
+- `public/images/ebooks/`: capas e imagens promocionais públicas.
 
 Os campos ainda não informados aparecem como **Pendente** ou **Descrição pendente** sem quebrar a interface. Substitua os campos vazios pelos caminhos relativos dos arquivos, por exemplo `./images/apps/meu-icone.png`.
 

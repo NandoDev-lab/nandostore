@@ -15,6 +15,8 @@ const translations = {
 }
 
 Object.assign(translations, additionalTranslations)
+// Chaves derivadas do idioma também precisam existir em todos os dicionários:
+// elas não fazem parte dos objetos adicionais extensos acima.
 const originalLanguageLabels = {
   'pt-BR': 'Idioma Original: Português do Brasil',
   en: 'Original language: Brazilian Portuguese',
@@ -63,8 +65,11 @@ Object.values(translations).forEach((dictionary) => Object.keys(dictionary).forE
 }))
 
 export function LanguageProvider({ children }) {
+  // A preferência sobrevive a recargas; um código sem dicionário usa inglês
+  // como fallback para os textos, sem apagar o valor salvo pelo navegador.
   const [language, setLanguage] = useState(() => localStorage.getItem('nandostore-language') || 'pt-BR')
   const activeTranslations = translations[language] || translations.en
+  // O objeto memoizado evita recriar o contrato do contexto sem mudança de idioma.
   const value = useMemo(() => ({ language, setLanguage, t: (key) => activeTranslations[key] || translations.en[key] || key, languages: supportedLanguages }), [activeTranslations, language])
 
   useEffect(() => { localStorage.setItem('nandostore-language', language); document.documentElement.lang = language }, [language])

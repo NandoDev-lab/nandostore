@@ -10,10 +10,13 @@ import { getEbookTitle, sortByRecent } from '../utils/catalog'
 // permitindo trocar a fonte por uma API sem reescrever a apresentação.
 export default function Home({ apps, ebooks, bannerBook, onOpen, onNavigate }) {
   const { t, language } = useLanguage()
+  // Destaques são limitados separadamente por tipo para não misturar formatos;
+  // recentes também mantêm grades distintas de apps e de e-books.
   const featuredApps = sortByRecent(apps.filter((item) => item.featured)).slice(0, 4)
   const featuredEbooks = sortByRecent(ebooks.filter((item) => item.featured)).slice(0, 4)
   const recentApps = sortByRecent(apps)
   const recentEbooks = sortByRecent(ebooks)
+  // A propriedade `type` define o componente e os campos do card apropriados.
   const renderCard = (item) => item.type === 'ebook' ? <EbookCard key={item.id} item={item} onOpen={onOpen} /> : <ProductCard key={item.id} item={item} onOpen={onOpen} />
   return <main>
     <section className="hero"><div className="hero-copy"><span className="eyebrow">{t('portal')}</span><h1>{t('heroTitle')} <em>{t('life')}</em></h1><p>{t('heroDescription')}</p><div className="hero-actions"><button className="button primary" onClick={() => onNavigate('apps')}>{t('explore')} <span>↗</span></button><button className="button quiet" onClick={() => onNavigate('ebooks')}>{t('discoverBooks')}</button></div></div><div className="hero-art"><div className="orbit orbit-one" /><div className="orbit orbit-two" /><div className="hero-card back"><span>06</span><small>{t('projects')}</small></div><div className="hero-card front"><span>01</span><small>{t('readings')}</small><strong>Gatilhos<br />do pecado</strong></div></div></section>

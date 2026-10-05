@@ -5,8 +5,8 @@ import EbookCard from '../components/EbookCard'
 import ProductCard from '../components/ProductCard'
 import { useLanguage } from '../i18n/useLanguage.js'
 
-// Catálogo compartilha a grade de cards, mas conserva o filtro de aplicativos
-// local à página para não criar estado global desnecessário.
+// `type` seleciona o catálogo de e-books ou o de apps/jogos. O filtro fica local
+// à página; os componentes de card continuam compartilhados com a Home.
 export default function Catalog({ type, apps, ebooks, onOpen }) {
   const { t } = useLanguage()
   const [filter, setFilter] = useState('all')

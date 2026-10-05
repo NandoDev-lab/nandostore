@@ -1,5 +1,6 @@
-// Dados editáveis da página Sobre. Manter este conteúdo fora do componente
-// permite atualizar a apresentação do autor sem procurar texto em JSX.
+// Fonte de dados da página Sobre. `biography` é o texto original e
+// `biographyTranslations` usa os códigos de languages.js; a página recorre ao
+// original quando não encontra uma tradução para o idioma ativo.
 import ReactMarkdown from 'react-markdown';
 
 export const profile = {
@@ -150,6 +151,8 @@ Mon parcours réunit **logiciel, automatisation et analyse** afin de transformer
 
   photo: '/images/foto pessoal.jpeg',
 
+  // Cada link usa { label, href }. Os rótulos também identificam os ícones em
+  // About.jsx; para e-mail, href deve usar o protocolo mailto:.
   socialLinks: [
     { label: 'GitHub', href: 'https://github.com/NandoDev-lab' },
     { label: 'WhatsApp', href: 'https://wa.me/5512996286354' },
